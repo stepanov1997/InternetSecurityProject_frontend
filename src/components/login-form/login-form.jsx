@@ -22,8 +22,7 @@ export const LoginForm = props => {
             })
             if (response.status === 200) {
                 const message = await response.json();
-                props.setCurrentUser(message.username)
-                props.setToken(message.token)
+                props.setCurrentUser({username: message.username, token: message.token})
                 history.push("/users")
             } else {
                 const message = await response.json();

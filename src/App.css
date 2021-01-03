@@ -45,3 +45,20 @@
     transform: rotate(360deg);
   }
 }
+
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  width: 20%;
+  background-color: #fffcd8;
+}
+
+.content {
+  width: 80%;
+}

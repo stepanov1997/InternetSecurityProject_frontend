@@ -1,13 +1,11 @@
 import React, {useEffect} from 'react'
-import {useHistory} from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 
 export const Logout = props => {
     const history = useHistory();
     useEffect(() => {
-        props.setToken("");
         props.setCurrentUser("");
-        history.push('/login');
-    }, [])
+    }, [history, props])
 
-    return (<></>);
+    return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;;
 }
