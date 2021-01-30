@@ -3,7 +3,6 @@ import './chat.css'
 import './messages.css'
 import '../../fonts/fontawesome-free-5.15.1-web/css/all.css';
 import config from "../../config.json";
-import {Collapse, Button, CardBody, Card} from 'reactstrap';
 import {usePrevious} from "../previous-hook/previous-hook";
 import {Redirect, useHistory} from "react-router-dom";
 

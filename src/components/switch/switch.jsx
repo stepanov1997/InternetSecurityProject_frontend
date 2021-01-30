@@ -1,5 +1,4 @@
 import React from 'react'
-import {UserList} from "../users/user-list";
 import {LoginForm} from "../login-form/login-form";
 import {RegisterForm} from "../register-form/register-form";
 import {Logout} from "../logout/logout";

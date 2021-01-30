@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f6609135-385a-453a-af39-0f1b5265bcdd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cert/cert.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cert/key.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/login-form/login-form.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/login-form/login-form.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/register-form/register-form.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/user/user.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/users/user-list.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/chat/chat.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chat/chat.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/switch/switch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/switch/switch.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +36,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/chat" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -55,6 +48,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="ts.external.directory.path" value="C:\Users\Kristijan\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\203.5981.135\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -72,7 +66,7 @@
       <recent name="C:\Users\Kristijan\source\repos\InternetSecurityProject\client_app\cert" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.Debug">
+  <component name="RunManager" selected="npm.start">
     <configuration name="Debug" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
     </configuration>
@@ -101,6 +95,8 @@
       <workItem from="1609371960931" duration="1009000" />
       <workItem from="1609617489968" duration="11074000" />
       <workItem from="1609670905869" duration="27618000" />
+      <workItem from="1611970139262" duration="3899000" />
+      <workItem from="1612040591627" duration="406000" />
     </task>
     <servers />
   </component>
@@ -174,8 +170,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/chat/chat.jsx</url>
-          <line>153</line>
-          <properties lambdaOrdinal="-1" />
+          <line>152</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
