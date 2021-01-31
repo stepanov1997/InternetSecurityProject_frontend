@@ -1,9 +1,29 @@
 {
   "routes": [
     {
-      "route": "/*",
+      "route": "/login",
       "serve": "/index.html",
-      "statusCode": 200
+      "status": 200
+    },
+    {
+      "route": "/register",
+      "serve": "/index.html",
+      "status": 200
+    },
+    {
+      "route": "/logout",
+      "serve": "/index.html",
+      "status": 200
+    },
+    {
+      "route": "/",
+      "serve": "/index.html",
+      "status": 200
+    },
+    {
+      "route": "/chat",
+      "serve": "/index.html",
+      "status": 200
     }
   ]
 }
