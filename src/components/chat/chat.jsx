@@ -3,8 +3,7 @@ import './chat.css'
 import './messages.css'
 import '../../fonts/fontawesome-free-5.15.1-web/css/all.css';
 import config from "../../config.json";
-import {usePrevious} from "../previous-hook/previous-hook";
-import {Redirect, useHistory} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 export const Chat = props => {
     const [activeUsers, setActiveUsers] = useState([])
@@ -16,13 +15,13 @@ export const Chat = props => {
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState("")
 
-    const history = useHistory();
+    //const history = useHistory();
 
-    let timer = setTimeout(() => {
+    setTimeout(() => {
         setRefresh(!refresh);
     }, 5_000)
 
-    const prevState = usePrevious({
+    /*const prevState = usePrevious({
         activeUsers,
         inactiveUsers,
         refresh,
@@ -30,7 +29,7 @@ export const Chat = props => {
         isOpenInactive,
         receiver,
         messages
-    })
+    })*/
     const toggleActive = () => setIsOpenActive(!isOpenActive);
     const toggleInactive = () => setIsOpenInactive(!isOpenInactive);
 
@@ -44,7 +43,7 @@ export const Chat = props => {
                 if (receiver) fetchReceiverMessages(setMessages, props.currentUser, receiver)
             })
 
-    }, [refresh, receiver])
+    }, [refresh, receiver, props.currentUser])
 
     if (!props.currentUser) {
         return <Redirect to={{pathname: '/login', state: {from: props.location}}}/>;
