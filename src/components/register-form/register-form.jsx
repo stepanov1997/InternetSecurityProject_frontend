@@ -40,6 +40,7 @@ export const RegisterForm = props => {
     useEffect(() => {
         register({name: "Username"});
         register({name: "Password"});
+        register({name: "Email"});
     }, [register]);
 
     let handleClickToLogin = e => {
@@ -66,6 +67,12 @@ export const RegisterForm = props => {
                         <Input onChange={e => handleChange(e, 'Password')} ref={register({required: true})}
                                type="password"
                                name="password" id="password" placeholder="Enter password"/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="email">Email: </Label>
+                        <Input onChange={e => handleChange(e, 'Email')} ref={register({required: true})}
+                               type="email"
+                               name="email" id="email" placeholder="Enter email"/>
                     </FormGroup>
                     <FormGroup>
                         <Button type={'submit'}>Register user</Button>

@@ -62,8 +62,11 @@
 }
 
 .messages {
-    height: 80%;
+    height: 70%;
     text-align: center;
+    overflow: scroll;
+    overflow-scrolling: auto;
+    margin-bottom: 10px;
 }
 
 .icon {

@@ -6,8 +6,8 @@ import {BrowserRouter as Router} from "react-router-dom";
 import {AppSwitch} from "./components/switch/switch";
 
 const App = () => {
-    const [currentUser, setCurrentUser] = useSessionStorage("currentUser", {});
-
+    const [currentUser, setCurrentUser] = useSessionStorage("currentUser", undefined);
+    console.log(currentUser)
     return (
         <div className="App">
             <Router>
@@ -15,7 +15,7 @@ const App = () => {
                     <Links currentUser={currentUser}/>
 
                     <div className={"content"}>
-                        {currentUser.username ? (<h1 style={{margin:"21.4px 0"}}>{`Welcome, ${currentUser.username}.`}</h1>) : ""}
+                        {(currentUser && currentUser.username) ? (<h1 style={{margin:"21.4px 0"}}>{`Welcome, ${currentUser.username}.`}</h1>) : ""}
                         <AppSwitch currentUser={currentUser}
                                    setCurrentUser={setCurrentUser}/>
                     </div>

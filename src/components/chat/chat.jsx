@@ -39,7 +39,6 @@ export const Chat = props => {
         fetchActiveUsers(setActiveUsers, 'active', props.currentUser)
             .then(() => fetchActiveUsers(setInactiveUsers, 'inactive', props.currentUser))
             .then(() => {
-                console.log("fetchReceiverMessages")
                 if (receiver) fetchReceiverMessages(setMessages, props.currentUser, receiver)
             })
 
