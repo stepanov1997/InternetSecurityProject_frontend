@@ -1,27 +1,31 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Button, Form, FormGroup, Label, Input, NavLink} from 'reactstrap';
-import {useForm} from 'react-hook-form'
 import config from '../../config.json'
 import './login-form.css'
 import {useHistory} from 'react-router-dom';
 
 export const LoginForm = props => {
-    const {register, handleSubmit, setValue} = useForm();
+    const [form, setForm] = useState({})
     const [errorMessage, setErrorMessage] = useState("");
     const history = useHistory();
 
-    const onSubmit = async data => {
+    const onSubmit = async e => {
+        e.preventDefault()
+        var data = new FormData();
+        for (const [key, value] of Object.entries(form)) {
+            console.log(key,value)
+            data.append(key, value)
+        }
         try {
             let response = await fetch(`${config.root_url}/user/login_part_one`, {
                 mode: "cors",
                 method: "POST",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify(data)
+                // headers: {
+                //     "content-type": "application/json"
+                // },
+                body: data
             })
             if (response.status === 200) {
-                const message = await response.json();
 
                 let repeatToken = true
                 while (repeatToken) {
@@ -58,33 +62,36 @@ export const LoginForm = props => {
         }
 
     }
-    const handleChange = (event, name) => {
-        setValue(name, event.target.value);
-    };
-    useEffect(() => {
-        register({name: "Username"});
-        register({name: "Password"});
-    }, [register]);
-
     let handleClickToRegister = e => {
         history.push('/register');
+    };
+    let handleInputChange = (e) =>{
+        let tmp = form
+        if(e.target.id==="certificate")
+            tmp[e.target.name] = e.target.files[0]
+        else
+            tmp[e.target.name] = e.target.value
+        setForm(tmp)
     };
     return (<div className={"login-main"}>
             <h1>Login</h1>
             <hr/>
             <div className={'login-container'}>
-                <Form method='POST' onSubmit={handleSubmit(onSubmit)}>
+                <Form encType={"multipart/form-data"} method='POST' onSubmit={onSubmit} >
                     <FormGroup>
                         <Label for="username">Username: </Label>
-                        <Input onChange={e => handleChange(e, 'Username')} ref={register({required: true})}
-                               type="username"
+                        <Input type="username" onChange={handleInputChange}
                                name="username" id="username" placeholder="Enter username" value={props.username}/>
                     </FormGroup>
                     <FormGroup>
                         <Label for="password">Password: </Label>
-                        <Input onChange={e => handleChange(e, 'Password')} ref={register({required: true})}
-                               type="password"
+                        <Input type="password" onChange={handleInputChange}
                                name="password" id="password" placeholder="Enter password"/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="certificate">Client certificate: </Label>
+                        <Input type="file" onChange={handleInputChange}
+                               name="certificate" id="certificate" placeholder="Enter certificate"/>
                     </FormGroup>
                     <FormGroup>
                         <Button type={'submit'}>login user</Button>
