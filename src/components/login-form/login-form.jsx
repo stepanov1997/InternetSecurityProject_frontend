@@ -13,7 +13,6 @@ export const LoginForm = props => {
         e.preventDefault()
         var data = new FormData();
         for (const [key, value] of Object.entries(form)) {
-            console.log(key,value)
             data.append(key, value)
         }
         try {
@@ -27,30 +26,40 @@ export const LoginForm = props => {
             })
             if (response.status === 200) {
 
-                let repeatToken = true
-                while (repeatToken) {
+                const data = await response.json()
+                if (data && data.status === 200) {
 
-                    const token = prompt("Token is sent on your email.\nPlease enter.", "");
+                    let repeatToken = true
+                    while (repeatToken) {
 
-                    if(token==null) continue;
-                    let response = await fetch(`${config.root_url}/user/login_part_two`, {
-                        mode: "cors",
-                        method: "POST",
-                        headers: {
-                            "content-type": "application/json"
-                        },
-                        body: JSON.stringify({token: token})
-                    })
-                    if (response.status === 200) {
-                        const message = await response.json();
-                        props.setCurrentUser({username: message.username, token: message.token})
-                        repeatToken = false;
-                        history.push("/chat")
+                        const token = prompt("Token is sent on your email.\nPlease enter.", "");
 
-                    } else {
-                        const message = await response.json();
-                        repeatToken=window.confirm(message+"\nDo you want to enter token again?")
+                        if (token == null) continue;
+                        let response = await fetch(`${config.root_url}/user/login_part_two`, {
+                            mode: "cors",
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            body: JSON.stringify({token: token})
+                        })
+                        if (response.status === 200) {
+                            const data = await response.json();
+                            if (data && data.status === 200) {
+                                props.setCurrentUser({username: data.data.username, token: data.data.token})
+                                repeatToken = false;
+                                history.push("/chat")
+                            }else{
+                                window.alert(data.message)
+                            }
+                        } else {
+                            const data = await response.json();
+                            repeatToken = window.confirm(data.message + "\nDo you want to enter token again?")
+                        }
                     }
+                }
+                else{
+                    window.alert(data.message)
                 }
 
             } else {
@@ -65,9 +74,9 @@ export const LoginForm = props => {
     let handleClickToRegister = e => {
         history.push('/register');
     };
-    let handleInputChange = (e) =>{
+    let handleInputChange = (e) => {
         let tmp = form
-        if(e.target.id==="certificate")
+        if (e.target.id === "certificate")
             tmp[e.target.name] = e.target.files[0]
         else
             tmp[e.target.name] = e.target.value
@@ -77,7 +86,7 @@ export const LoginForm = props => {
             <h1>Login</h1>
             <hr/>
             <div className={'login-container'}>
-                <Form encType={"multipart/form-data"} method='POST' onSubmit={onSubmit} >
+                <Form encType={"multipart/form-data"} method='POST' onSubmit={onSubmit}>
                     <FormGroup>
                         <Label for="username">Username: </Label>
                         <Input type="username" onChange={handleInputChange}

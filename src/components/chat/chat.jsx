@@ -4,6 +4,7 @@ import './messages.css'
 import '../../fonts/fontawesome-free-5.15.1-web/css/all.css';
 import config from "../../config.json";
 import {Redirect} from "react-router-dom";
+import {useHistory} from "react-router";
 
 export const Chat = props => {
     const [activeUsers, setActiveUsers] = useState([])
@@ -12,57 +13,47 @@ export const Chat = props => {
     const [isOpenActive, setIsOpenActive] = useState(true);
     const [isOpenInactive, setIsOpenInactive] = useState(false);
     const [receiver, setReceiver] = useState(undefined)
+    const [blockedReceivers, setBlockedReceivers] = useState([])
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState("")
 
-    //const history = useHistory();
+    const history = useHistory();
 
     setTimeout(() => {
         setRefresh(!refresh);
     }, 5_000)
 
-    /*const prevState = usePrevious({
-        activeUsers,
-        inactiveUsers,
-        refresh,
-        isOpenActive,
-        isOpenInactive,
-        receiver,
-        messages
-    })*/
     const toggleActive = () => setIsOpenActive(!isOpenActive);
     const toggleInactive = () => setIsOpenInactive(!isOpenInactive);
 
 
     useEffect(() => {
 
-        fetchActiveUsers(setActiveUsers, 'active', props.currentUser)
-            .then(() => fetchActiveUsers(setInactiveUsers, 'inactive', props.currentUser))
+        fetchActiveUsers(history, setActiveUsers, 'active', props.currentUser)
+            .then(() => fetchActiveUsers(history, setInactiveUsers, 'inactive', props.currentUser))
             .then(() => {
-                if (receiver) fetchReceiverMessages(setMessages, props.currentUser, receiver)
+                if (receiver && !blockedReceivers.includes(receiver)) fetchReceiverMessages(setMessages, blockedReceivers, setBlockedReceivers, props.currentUser, receiver)
             })
 
-    }, [refresh, receiver, props.currentUser])
+    }, [refresh, receiver, props.currentUser, blockedReceivers, history])
 
     if (!props.currentUser) {
         return <Redirect to={{pathname: '/login', state: {from: props.location}}}/>;
     }
 
     function openChat(username) {
-
-        console.log("setReceiver")
         setReceiver(username)
     }
 
     const handleKeyPress = async (event) => {
         if (event.key === 'Enter') {
-            await sendMessageToReceiver(messages, setMessages, props.currentUser, receiver, newMessage)
+            await sendMessageToReceiver(messages, setMessages, blockedReceivers, setBlockedReceivers, props.currentUser, receiver, newMessage)
             setNewMessage("");
         }
     }
 
     const handleClick = async () => {
-        await sendMessageToReceiver(messages, setMessages, props.currentUser, receiver, newMessage)
+        await sendMessageToReceiver(messages, setMessages, blockedReceivers, setBlockedReceivers, props.currentUser, receiver, newMessage)
         setNewMessage("");
     }
 
@@ -75,7 +66,9 @@ export const Chat = props => {
                     {
                         activeUsers.map((val, id) => (
                             <div key={id} onClick={() => openChat(val.username)}
-                                 className={"activeUserItem"}>{val.username} <i className="fas fa-circle online"/></div>
+                                 className={"activeUserItem"}>{val.username}
+                                <i className={`fas fa-circle ${blockedReceivers.includes(val.username) ? "blocked" : "online"}`}/>
+                            </div>
                         ))
                     }
                 </div>
@@ -106,7 +99,8 @@ export const Chat = props => {
                 </div>
                 <div className={"new-message"}>
                     <div>
-                        <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} onKeyPress={handleKeyPress} />
+                        <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)}
+                               onKeyPress={handleKeyPress}/>
                         <i className={"icon fas fa-paper-plane"} onClick={handleClick}/>
                     </div>
                 </div>
@@ -115,11 +109,15 @@ export const Chat = props => {
     )
 }
 
-const sendMessageToReceiver = async (message, setMessages, currentUser, receiver, content) => {
+const sendMessageToReceiver = async (message, setMessages, blockedReceivers, setBlockedReceivers, currentUser, receiver, content) => {
 
+    const body = JSON.stringify({
+        content: content,
+        sender: currentUser.username,
+        receiver: receiver,
+    })
     try {
         const bearer = 'Bearer ' + currentUser.token;
-        console.log(currentUser.token)
         let response = await fetch(`${config.root_url}/chat/messages/send`, {
             method: 'POST',
             mode: "cors",
@@ -129,27 +127,33 @@ const sendMessageToReceiver = async (message, setMessages, currentUser, receiver
                 'Authorization': bearer,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                content: content,
-                sender: currentUser.username,
-                receiver: receiver,
-            })
+            body: body
         })
         if (response.status === 200) {
-            const currentMessage = await response.json();
-            setMessages(oldArray => [...oldArray, currentMessage]);
-            await fetchReceiverMessages(setMessages, currentUser, receiver)
+            const data = await response.json();
+            if (data && data.status === 200) {
+                setMessages(oldArray => [...oldArray, data.data]);
+                await fetchReceiverMessages(setMessages, blockedReceivers, setBlockedReceivers, currentUser, receiver)
+            } else if (data && data.status === 503) {
+                window.alert("ALERT! Potential attack, please relog in again.")
+                setBlockedReceivers([...blockedReceivers, receiver])
+            } else if (data && data.status === 401) {
+                window.alert(data.message)
+            } else {
+                window.alert("Error.")
+            }
+        } else {
+            window.alert("Error.")
         }
     } catch (e) {
-        console.log(e)
+        window.alert("Error")
     }
 }
 
-const fetchReceiverMessages = async (setMessages, currentUser, receiver) => {
+const fetchReceiverMessages = async (setMessages, blockedReceivers, setBlockedReceivers, currentUser, receiver) => {
 
     try {
         const bearer = 'Bearer ' + currentUser.token;
-        console.log(currentUser.token)
         let response = await fetch(`${config.root_url}/chat/messages`, {
             method: 'POST',
             mode: "cors",
@@ -162,15 +166,28 @@ const fetchReceiverMessages = async (setMessages, currentUser, receiver) => {
             body: JSON.stringify(receiver)
         })
         if (response.status === 200) {
-            const message = await response.json();
-            setMessages(message)
+            const data = await response.json();
+            if (data && data.status === 200) {
+                setMessages(data.data)
+            } else if (data && data.status === 503) {
+                setMessages(data.data)
+                if (!blockedReceivers.includes(receiver))
+                    setBlockedReceivers([...blockedReceivers, receiver])
+                window.alert("ALERT! Potential attack, please relog in again.")
+            } else if (data && data.status === 401) {
+                window.alert(data.message)
+            } else {
+                window.alert("Error.")
+            }
+        } else {
+            window.alert("Error.")
         }
     } catch (e) {
-        console.log(e)
+        window.alert("Error")
     }
 }
 
-const fetchActiveUsers = async (setUsers, type, currentUser) => {
+const fetchActiveUsers = async (history, setUsers, type, currentUser) => {
     try {
         const bearer = 'Bearer ' + currentUser.token;
         let response = await fetch(`${config.root_url}/chat/${type}`, {
@@ -183,10 +200,18 @@ const fetchActiveUsers = async (setUsers, type, currentUser) => {
             }
         })
         if (response.status === 200) {
-            let users = await response.json();
-            users = users.filter(elem => elem.username !== currentUser.username);
-            setUsers(users)
+            let data = await response.json();
+            if (data.status && data.status === 200) {
+                let users = data.data.filter(elem => elem.username !== currentUser.username);
+                setUsers(users)
+            } else if (data.status && data.status === 401) {
+                window.alert(data.message)
+                history.push("/logout")
+            }
+        } else {
+            window.alert("Error.")
         }
     } catch (e) {
+        history.push("/logout")
     }
 }

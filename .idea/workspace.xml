@@ -12,8 +12,11 @@
       <change beforePath="$PROJECT_DIR$/src/components/login-form/login-form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login-form/login-form.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/previous-hook/previous-hook.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/previous-hook/previous-hook.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/register-form/register-form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/register-form/register-form.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/session-storage-hook/session-storage-hook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/session-storage-hook/session-storage-hook.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/switch/switch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/switch/switch.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fonts/fontawesome-free-5.15.1-web/attribution.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/fontawesome-free-5.15.1-web/attribution.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +106,8 @@
       <workItem from="1612040591627" duration="406000" />
       <workItem from="1612090240837" duration="12683000" />
       <workItem from="1612178461032" duration="974000" />
-      <workItem from="1612288597252" duration="9111000" />
+      <workItem from="1612288597252" duration="9702000" />
+      <workItem from="1612354312903" duration="11098000" />
     </task>
     <servers />
   </component>
@@ -177,7 +181,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/chat/chat.jsx</url>
-          <line>150</line>
+          <line>155</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -188,7 +192,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/login-form/login-form.jsx</url>
           <line>12</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>

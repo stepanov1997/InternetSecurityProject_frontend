@@ -116,6 +116,9 @@
 .online {
     color: lawngreen;
 }
+.blocked {
+    color: darkred;
+}
 .offline {
     color: darkgray;
 }

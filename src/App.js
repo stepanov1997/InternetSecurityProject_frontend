@@ -7,7 +7,6 @@ import {AppSwitch} from "./components/switch/switch";
 
 const App = () => {
     const [currentUser, setCurrentUser] = useSessionStorage("currentUser", undefined);
-    console.log(currentUser)
     return (
         <div className="App">
             <Router>
