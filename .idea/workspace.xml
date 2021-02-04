@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f6609135-385a-453a-af39-0f1b5265bcdd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cert/server.key" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cert/server.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cert/cert.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cert/key.pem" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/chat/chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chat/chat.css" afterDir="false" />
@@ -14,6 +19,8 @@
       <change beforePath="$PROJECT_DIR$/src/components/register-form/register-form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/register-form/register-form.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/session-storage-hook/session-storage-hook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/session-storage-hook/session-storage-hook.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/switch/switch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/switch/switch.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/user/user.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/user-list.jsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/fonts/fontawesome-free-5.15.1-web/attribution.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/fontawesome-free-5.15.1-web/attribution.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
@@ -26,8 +33,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -43,7 +50,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cert" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -61,13 +68,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\stepa\WebstormProjects\InternetSecurityProject_frontend\cert" />
       <recent name="C:\Users\Kristijan\source\repos\InternetSecurityProject\client_app\src\components\chat" />
       <recent name="C:\Users\Kristijan\source\repos\InternetSecurityProject\client_app\src\components" />
       <recent name="C:\Users\Kristijan\source\repos\InternetSecurityProject\client_app\src\fonts" />
       <recent name="C:\Users\Kristijan\source\repos\InternetSecurityProject\client_app\cert" />
-      <recent name="C:\Users\Kristijan\source\repos\InternetSecurityProject\client_app\node_modules\webpack-dev-server\ssl" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\stepa\WebstormProjects\InternetSecurityProject_frontend\cert" />
       <recent name="C:\Users\Kristijan\source\repos\InternetSecurityProject\client_app\src\components\chat" />
       <recent name="C:\Users\Kristijan\source\repos\InternetSecurityProject\client_app\src\fonts" />
       <recent name="C:\Users\Kristijan\source\repos\InternetSecurityProject\client_app\cert" />
@@ -107,7 +115,8 @@
       <workItem from="1612090240837" duration="12683000" />
       <workItem from="1612178461032" duration="974000" />
       <workItem from="1612288597252" duration="9702000" />
-      <workItem from="1612354312903" duration="11098000" />
+      <workItem from="1612354312903" duration="11391000" />
+      <workItem from="1612436417361" duration="14761000" />
     </task>
     <servers />
   </component>
@@ -173,11 +182,6 @@
           <url>file://$PROJECT_DIR$/src/components/users/user-list.jsx</url>
           <line>19</line>
           <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/users/user-list.jsx</url>
-          <line>20</line>
-          <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/chat/chat.jsx</url>

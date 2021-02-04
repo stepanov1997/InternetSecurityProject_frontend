@@ -1,0 +1,9 @@
+.certificates {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    text-align: center;
+}
